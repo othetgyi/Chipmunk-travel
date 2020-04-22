@@ -1,6 +1,7 @@
 var Trip = require('../models/trips');
 var User = require('../models/user');
 var sendMail = require('../sendMail.js');
+var getDates = require('../dates.js');
 
 var TripsController = {
 // import { companionEmailSend } from '../sendMail.js';
@@ -172,8 +173,50 @@ var TripsController = {
       })
     })
     setTimeout(function(){res.redirect('/trips/view/' + req.params.id + '#message-section')}, 500);
+  },
+
+
+
+  ViewActivities: function(req, res) {
+    var username = req.cookies.CurrentUser
+    var tripId = req.params.id
+    Trip.findOne({_id: tripId}, function(err, trip){
+      if (err) { throw err}
+      var dates = getDates.getDates(trip.startDate, trip.endDate)
+      res.render('trips/itinerary', {trip: trip, dates: dates, username: username})
+    })
+  },
+
+  AddActivity: function(req, res) {
+    var tripId = req.params.id;
+    var newActivity = req.body.activity;
+    var eachDate = req.body.eachDate;
+    var query = {eachDate: eachDate ,activities: newActivity}
+    Trip.findOneAndUpdate({_id: tripId}, {$push: {activities: query}}, function (err, activity) {
+      if (err) { throw err}
+      });
+      setTimeout(function(){res.redirect('/trips/itinerary/' + req.params.id)}, 500);
+  },
+
+//The DeleteActivity function is passing the activityIndex but not the tripId into the URL for some reason!!! 21/4/20
+  DeleteActivity: function(req, res){
+    var tripId = req.params.id;
+    var newActivity = req.body.activity;
+    var eachDate = req.body.eachDate;
+  
+    Trip.findOne({_id: tripId}, function(err, trip){
+      if (err) {throw err}
+    var activityIndex  =  trip.activities.findIndex(obj => obj.activities === newActivity && obj.eachDate === eachDate);
+    console.log(activityIndex)
+      trip.activities.splice(activityIndex, 1)
+      trip.save(function(err){
+        if(err) {throw err}
+      });
+    });
+     setTimeout(function(){res.redirect('/trips/itinerary/' + req.params.id)}, 500);
   }
 
-};
+
+ };
 
 module.exports = TripsController;

@@ -7,6 +7,9 @@
   <div class='trip-title'>
     <h1><%=username%>'s trip to <%= trip.destination %></h1>
   </div>
+  <form class='btn' id="edit-button" action="/trips/itinerary/<%=trip.id%>">
+    <input type="submit"  value="View Itinerary">
+  </form>
   <% if (editDate !== true){%>
     <form class='btn' id="edit-button" method="post" action="/trips/edit-data/<%=trip.id%>">
       <input type="submit"  value="Edit Trip">
@@ -40,7 +43,7 @@
 </div>
 
 <div id='flights-section'>
-  <h4>Flights</h3>
+  <h4>Flights</h4>
 <!-- Added fields to input flight data -->
 <% var i = -1 %>
   <% trip.flights.forEach((flight) => {%>

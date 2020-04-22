@@ -18,5 +18,8 @@ router.post('/delete-flight/:id/:index', TripsController.DeleteFlight);
 router.post('/delete-accommodation/:id/:index', TripsController.DeleteAccommodation);
 router.post('/add-accommodation/:id', TripsController.AddAccommodation);
 router.post('/chat/:id', TripsController.Chat);
+router.get('/itinerary/:id', TripsController.ViewActivities);
+router.post('/add-activity/:id', TripsController.AddActivity);
+router.post('/delete-activity/:id/:index', TripsController.DeleteActivity);
 
 module.exports = router;
