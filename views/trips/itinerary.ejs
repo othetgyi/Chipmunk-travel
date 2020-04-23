@@ -3,7 +3,7 @@
 
 <div>
   <div class='trip-title'>
-    <h1>Itinerary for <%=username%>'s trip to <%= trip.destination %></h1>
+    <h1>Itinerary for <strong><%=username%>'s</strong> trip to <strong><%= trip.destination %></strong></h1>
 
   </div>
   <form class='btn' id="edit-button" action="/trips/view/<%=trip.id%>">
@@ -11,7 +11,7 @@
   </form>
     <% var i = -1 %>
     <% dates.forEach((date) => {%>
-      <h4><%= date.toDateString() %></h4>
+      <h4><strong><%= date.toDateString() %></strong></h4>
     <% trip.activities.forEach((activity) => {%>
       <% i++ %>
         <% if (activity.eachDate.toString() === date.toString()){%>
