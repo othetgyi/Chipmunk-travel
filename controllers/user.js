@@ -45,7 +45,7 @@ var UserController = {
         res.redirect('/user/profile')
       }
       else {
-        res.redirect('/user/signin/?error=' + "User not found. Try again.")
+        res.redirect('/user/signin/?error=' + "Username or password not found, try again.")
       }
   })
 },
