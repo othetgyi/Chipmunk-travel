@@ -5,7 +5,7 @@
 
 <div>
   <div class='trip-title'>
-    <h1><%=username%>'s trip to <%= trip.destination %></h1>
+    <h1><%=username%>'s trip to <strong><%= trip.destination %></strong></h1>
   </div>
   <form class='btn' id="edit-button" action="/trips/itinerary/<%=trip.id%>">
     <input type="submit"  value="View Itinerary">
