@@ -1,14 +1,15 @@
 <%- include ('../partials/home_signin.ejs') %>
-<h1>Chipmunk travel</h1>
+<h1>Chipmunk Travel</h1>
 
 <form id="login-form" action="/user/signin" method="post">
   <label for="name">Name </label>
   <input id="name" type="text" name="name" required class="form-control input_user" placeholder="name">
   <% if(errorMessage) {%>
-    <%= errorMessage %> <% }%>
+    <p class="error">
+    <%= errorMessage %> </p> <%}%>
   <label for="name">Password </label>
   <input id="password" type="password" name="password" required class="form-control input_user" placeholder="password">
-  <input type="submit" value="Sign in">
+  <input type="submit" value="Sign In">
 </form>
 
 <div class="mt-4">
