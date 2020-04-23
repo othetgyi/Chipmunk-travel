@@ -1,12 +1,18 @@
 <%- include ('../partials/header.ejs') %>
 <%- include ('../partials/body.ejs') %>
 
-<img id="header-image" src="https://source.unsplash.com/random/1600x900?<%= trip.destination %>, landscape">
 
-<div>
-  <div class='trip-title'>
-    <h1><%=username%>'s trip to <strong><%= trip.destination %></strong></h1>
+
+<div class="container">
+  <img id="header-image" src="https://source.unsplash.com/random/800x600?<%= trip.destination %>,landscape">
+  <div class="text-block">
+    <div class='trip-title'>
+      <h1><%=username%>'s trip to <%= trip.destination %></h1>
+    </div>
   </div>
+</div>
+<div>
+
   <form class='btn' id="edit-button" action="/trips/itinerary/<%=trip.id%>">
     <input type="submit"  value="View Itinerary">
   </form>
