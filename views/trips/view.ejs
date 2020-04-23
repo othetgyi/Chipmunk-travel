@@ -5,7 +5,7 @@
 
 <div>
   <div class='trip-title'>
-    <h1><%=username%>'s trip to <strong><%= trip.destination %></strong></h1>
+    <h1><strong><%=username%>'s</strong> trip to <strong><%= trip.destination %></strong></h1>
   </div>
   <form class='btn' id="edit-button" action="/trips/itinerary/<%=trip.id%>">
     <input type="submit"  value="View Itinerary">
@@ -24,15 +24,15 @@
 
 
 <div id='date-section'>
-  <h3>Dates</h3>
-  <p>Start date: <%=trip.startDate.toISOString().slice(0,10);%></p>
+  <h3><strong>Dates</strong></h3>
+   <p class="display-info"> Start date: <%=trip.startDate.toISOString().slice(0,10);%></p>
   <% if (editDate === true){%>
     <form id="edit-start-date-form" action="/trips/edit/<%=trip.id%>" method="post">
       <input class="form-control input_user" id="start-date" type="date" name="startDate" required>
       <input type="submit" value="Submit Change">
     </form>
   <%}%>
-  <p>End date: <%=trip.endDate.toISOString().slice(0,10);%></p>
+   <p class="display-info"> End date: <%=trip.endDate.toISOString().slice(0,10);%></p>
   <% if (editDate === true){%>
     <form id="edit-end-date-form" action="/trips/edit/<%=trip.id%>" method="post">
       <input class="form-control input_user" id="start-date" type="date" name="endDate" required>
@@ -43,21 +43,19 @@
 </div>
 
 <div id='flights-section'>
-  <h4>Flights</h4>
+  <h4><strong>Flights</strong></h4>
 <!-- Added fields to input flight data -->
 <% var i = -1 %>
   <% trip.flights.forEach((flight) => {%>
     <%i++%>
-    <ul>
-      Info
-      <li>Departure City: <%= flight.departureCity %></li>
-      <li>Airport: <%= flight.airport %></li>
-      <li>Airline: <%= flight.airline %></li>
-      <li>Date: <%= flight.date %></li>
-      <li>Departure Time: <%= flight.departureTime %></li>
-      <li>Flight number: <%= flight.flightNumber %></li>
-      <li>Booking reference: <%= flight.bookingReference %></li>
-    </ul>
+   <p class="display-info"> Departure City: <%= flight.departureCity %> </p>
+    <p class="display-info"> Airport: <%= flight.airport %> </p>
+    <p class="display-info"> Airline: <%= flight.airline %></p>
+    <p class="display-info">Date: <%= flight.date %></p>
+    <p class="display-info">Departure Time: <%= flight.departureTime %></p>
+    <p class="display-info">Flight number: <%= flight.flightNumber %></p>
+    <p class="display-info">Booking reference: <%= flight.bookingReference %></p>
+
     <% if (editDate === true){%>
       <form id="delete-flight-form" action="/trips/delete-flight/<%=trip.id%>/<%=i%>" method="post">
         <input type="submit" value="Delete Flight">
@@ -89,17 +87,16 @@
 
 
 <div id='accommodation-section'>
-  <h3>Accommodation</h3>
+  <h3><strong>Accommodation</strong></h3>
   <% var i = -1 %>
   <% trip.accommodations.forEach((accommodation) => {%>
     <% i++ %>
-    <ul>
-      Info
-      <li>Location: <%= accommodation.location %></li>
-      <li>Start Date: <%= accommodation.startDate %></li>
-      <li>End Date: <%= accommodation.endDate%></li>
-      <li>Booking reference: <%= accommodation.bookingReference %></li>
-    </ul>
+      <p class="display-info">Location: <%= accommodation.location %></p>
+      <p class="display-info">Start Date: <%= accommodation.startDate %></p>
+      <p class="display-info">End Date: <%= accommodation.endDate%></p>
+      <p class="display-info">Booking reference: <%= accommodation.bookingReference %></p>
+      <p class="display-info">Start Date: <%= accommodation.startDate %></p>
+
     <% if (editDate === true){%>
       <form id="delete-accommodation-form" action="/trips/delete-accommodation/<%=trip.id%>/<%=i%>" method="post">
         <input type="submit" value="Delete Accommodation">
@@ -124,10 +121,9 @@
 </div>
 
 <div id='companion-section'>
-  <h3>Companions</h3>
+  <h3><strong>Companions</strong></h3>
   <% trip.companionEmails.forEach((email) => {%>
-    <li><%=email%></br>
-    </li>
+    <p class="display-info"><%=email%></p>
   <%});%>
   <% if (editDate === true){%>
     <form id="add-user-form" action="/trips/add-user/<%=trip.id%>" method="post">
@@ -139,7 +135,7 @@
 
 
 
-  <h3 id='message-section'>Messages</h3>
+  <h3 id='message-section'><strong>Messages</strong></h3>
   <div>
   <% trip.chatMessages.forEach((message) => {%>
     <% if (username === message.author){%>
