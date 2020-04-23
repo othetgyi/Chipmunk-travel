@@ -2,6 +2,7 @@ var Trip = require('../models/trips');
 var User = require('../models/user');
 var sendMail = require('../sendMail.js');
 var getDates = require('../dates.js');
+var weatherForecast = require('../weather.js');
 
 var TripsController = {
 // import { companionEmailSend } from '../sendMail.js';
@@ -67,7 +68,8 @@ var TripsController = {
       if (req.cookies.CurrentUser) {
     Trip.findById(req.params.id, function(err, trip){
       if(err) {throw err}
-
+      var weatherItem = weatherForecast.weatherForecast(trip.destination)
+      console.log(weatherItem)
       if(req.cookies.editDates){
         res.render('trips/view', {trip: trip, username: username, editDate: true})
       } else {

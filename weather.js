@@ -1,20 +1,25 @@
 var weather = require('openweather-apis');
 
-// key: 6c4d68105c30a26731263cc1dc32fb24
 
-function weatherForecast(){
-  weather.setAPPID("6c4d68105c30a26731263cc1dc32fb24");
+function weatherForecast(location){
+  weather.setAPPID(process.env.APP_ID);
   weather.setLang('en');
-  weather.setCity("London");
+  weather.setCity(location);
   var weatherObject = {};
+
   weather.getTemperature(function(err, temp){
+      if (err) {throw err}
       weatherObject.temperature = temp
-        // console.log(temp);
     });
-    weather.getDescription(function(err, desc){
+  weather.getDescription(function(err, desc){
+        if (err) {throw err}
         weatherObject.description = desc
     });
-    setTimeout(function(){console.log(weatherObject)}, 2000);
+setTimeout(function(){ return weatherObject }, 2000);
 }
 
-weatherForecast();
+module.exports = {
+    weatherForecast: weatherForecast,
+  }
+
+// weatherForecast("London")
